@@ -37,6 +37,7 @@ Full usage:
  - `ls` / `list` - list installed project folders
      - `-v` / `--verbose` - List installed projects with repository and linked binaries
  - `r` / `remove` `<repo>` - uninstall repository
+ - `remove self` - uninstall `update-repo` command
  - `i` / `install` `<repo>` - install a repository
      - `-b` / `--branch` `<branch>` - specify a preferred branch (default: main/master)
  - `c` / `configure` - modify global configuration

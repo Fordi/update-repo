@@ -350,6 +350,7 @@ case "$SUBCOMMAND" in
     echo "    ls | list - list installed repositories"
     echo "      -v | --verbose - List installed projects with repository and linked binaries"
     echo "    r | remove [repo] - uninstall repository"
+    echo "    remove self - uninstall \`update-repo\` command"
     echo "    i | install [repo] - install a repository"
     echo "      -b | --branch [branch] - specify a preferred branch"
     echo "    c | configure - modify global configuration"
