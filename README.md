@@ -40,14 +40,14 @@ Full usage:
 ## Subcommands
 
  - `ls` | `list` - list installed repositories
- - `u` | `uninstall` `<repo>` - uninstall repository
+ - `r` | `remove` `<repo>` - uninstall repository
  - `i` | `install` `<repo>` - install a repository
      - `-b` | `-branch` `<branch>` - specify a preferred branch (default: main/master)
  - `c` | `configure` - modify global configuration
  - `d` | `dump-config` - dump the current global configuration
- - `U` | `update` `<repo>` - update repository
+ - `u` | `update` `<repo>` - update repository
       - `-b` | `-branch` `<branch>` - change preferred branch
- - `UA` | `update all` - update all installed repositories
+ - `ua` | `update all` - update all installed repositories
 
 ## Common flags:
  - `-s` | `-sources` - specify sources folder (default /opt or ~/.repos)

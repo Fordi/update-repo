@@ -90,6 +90,7 @@ function normalize-repo() {
   REPO="$(get-sources)/$1"
   if [[ -d "$REPO/.git" ]]; then
     if [[ "$(stat -c '%U' "$REPO")" == "$USER" ]]; then
+      cd "$REPO"
       git remote get-url origin 2>/dev/null && return;
     fi
   fi
@@ -193,6 +194,8 @@ function update-repo() {
   else
     cd "$source"
     git pull
+    uninstall-links "$source"
+    instal-links "$source"
   fi
 }
 
@@ -218,9 +221,9 @@ ALL=0
 BRANCH=
 VERBOSE=0
 while ((${#})); do case "$1" in
-  U | update | UA)
+  u | update | ua)
     SUBCOMMAND=update
-    if [[ "$1" == "UA" ]]; then
+    if [[ "$1" == "ua" ]]; then
       ALL=1
     fi
   ;;
@@ -287,11 +290,11 @@ case "$SUBCOMMAND" in
       list-sources
     else
       while read source; do
-        echo "$source"
-        echo "  repo: $(repo-for-source $source)"
-        echo "  binaries:"
+        echo "Installed: $source"
+        echo "  Repository: $(repo-for-source $source)"
+        echo "  Binaries:"
         while read link; do
-          echo "    $link"
+          echo "    $link -> $(readlink "$link")"
         done < <(list-links $source)
       done < <(list-sources)
     fi
@@ -321,8 +324,8 @@ case "$SUBCOMMAND" in
       SOURCE="$(get-sources)/$(project-name "$REPO")"
       cd "$SOURCE"
       git pull
-      uninstall-links "$source"
-      install-links "$source"
+      uninstall-links "$SOURCE"
+      install-links "$SOURCE"
     fi
   ;;
   usage)
@@ -332,14 +335,14 @@ case "$SUBCOMMAND" in
     fi
     echo "$SELF <subcommand> [...options]"
     echo "    ls | list - list installed repositories"
-    echo "    u | uninstall [repo] - uninstall repository"
+    echo "    r | remove [repo] - uninstall repository"
     echo "    i | install [repo] - install a repository"
     echo "      -b | -branch [branch] - specify a preferred branch"
     echo "    c | configure - modify global configuration"
     echo "    d | dump-config - dump the current global configuration"
-    echo "    U | update [repo] - update repository"
+    echo "    u | update [repo] - update repository"
     echo "      -b | -branch [branch] - specify a preferred branch"
-    echo "    UA | update all - update all installed repositories"
+    echo "    ua | update all - update all installed repositories"
     echo ""
     echo "Flags:"
     echo "    -s | -sources - specify sources folder (default /opt or ~/.repos)"
