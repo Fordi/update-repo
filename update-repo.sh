@@ -3,8 +3,10 @@ REPO="$1"; shift
 TARGET="${1:-/usr/local/bin}"; shift
 
 if [[ -z "$REPO" ]]; then
-  echo "$(basename "$0") [repository URL]" >&2
-  exit -1
+  wget https://fordi.github.io/update-repo/update-repo.sh -qO /usr/bin/update-repo
+  chmod +x /usr/bin/update-repo
+  echo 'Installed `update-repo` command' >&2
+  exit
 fi
 
 SOURCES="/opt/$(basename "$REPO")"
