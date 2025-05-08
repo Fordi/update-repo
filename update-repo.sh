@@ -30,7 +30,8 @@ function home-first-bin() {
       return 0;
     fi
   done < <(echo "$PATH")
-  return -1;
+  mkdir -p "$HOME/.local/bin"
+  echo "$HOME/.local/bin"
 }
 
 function get-target() {
