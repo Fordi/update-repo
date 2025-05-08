@@ -2,10 +2,27 @@
 REPO="$1"; shift
 TARGET="${1:-/usr/local/bin}"; shift
 
-if [[ -z "$REPO" ]]; then
-  wget https://fordi.github.io/update-repo/update-repo.sh -qO /usr/bin/update-repo
-  chmod +x /usr/bin/update-repo
-  echo 'Installed `update-repo` command' >&2
+if [[ -z "$REPO" || "$REPO" == "all" ]]; then
+  TYPE="Installed"
+  if [[ -f /usr/bin/update-repo ]]; then
+    TYPE="Updated"
+  fi
+  wget https://fordi.github.io/update-repo/update-repo.sh -qO /usr/bin/update-repo-tmp
+  chmod +x /usr/bin/update-repo-tmp
+  echo "${TYPE}"' `update-repo` command' >&2
+  if [[ "$REPO" == "all" ]]; then
+    while read git; do
+      dir="$(dirname "$git")"
+      if [[ -d "$dir/bin" ]]; then
+        cd "$dir"
+        /usr/bin/update-repo-tmp "$(git remote get-url origin)"
+      fi
+    done < <(find /opt -wholename '*/.git')
+  fi
+  if [[ -f /usr/bin/update-repo ]]; then
+    rm /usr/bin/update-repo
+    mv /usr/bin/update-repo-tmp /usr/bin/update-repo
+  fi
   exit
 fi
 

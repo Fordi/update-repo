@@ -26,5 +26,10 @@ wget https://fordi.github.io/update-repo/update-repo.sh -qO - | sudo bash /dev/s
 update-repo {repository URL}
 ```
 
+- Update all installed
+```bash
+update-repo all
+```
+
 Target repository must have a `bin` folder containing executables to be installed to `/usr/local/bin`.
 
