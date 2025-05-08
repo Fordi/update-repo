@@ -2,7 +2,7 @@
 REPO="$1"; shift
 TARGET="${1:-/usr/local/bin}"; shift
 
-SELF="/usr/bin/update-repo"
+SELF="/usr/local/bin/update-repo"
 
 if [[ -z "$REPO" || "$REPO" == "all" ]]; then
   TYPE="Installed"
@@ -10,14 +10,13 @@ if [[ -z "$REPO" || "$REPO" == "all" ]]; then
     TYPE="Updated"
   fi
   wget https://fordi.github.io/update-repo/update-repo.sh -qO "$SELF-tmp"
-  chmod +x /usr/bin/update-repo-tmp
-  echo "${TYPE}"' `update-repo` command' >&2
+  chmod +x "$SELF-tmp"
   if [[ "$REPO" == "all" ]]; then
     while read git; do
       dir="$(dirname "$git")"
       if [[ -d "$dir/bin" ]]; then
         cd "$dir"
-        /usr/bin/update-repo-tmp "$(git remote get-url origin)"
+        "$SELF-tmp" "$(git remote get-url origin)"
       fi
     done < <(find /opt -wholename '*/.git')
   fi
@@ -25,6 +24,7 @@ if [[ -z "$REPO" || "$REPO" == "all" ]]; then
     rm "$SELF"
   fi
   mv "$SELF-tmp" "$SELF"
+  echo "${TYPE}"' `update-repo` command' >&2
   exit
 fi
 
@@ -38,19 +38,14 @@ else
 fi
 cd "$SOURCES"
 
-function install() {
-  local file="$1"; shift;
-  local name="$(basename "$1")";
-  echo "Symlinking $SOURCES/bin/$file to $TARGET/$name"
-  ln -s "$SOURCES/bin/$file" "$TARGET/$name"
-}
-
 while read link; do
   rm "$link"
 done < <(find "$TARGET" -type l -lname "$SOURCES/*")
 
 cd "$SOURCES/bin"
 while read file; do
-  install "$file"
+  name="$(basename "$file")";
+  echo "Symlinking $SOURCES/bin/$file to $TARGET/$name"
+  ln -s "$SOURCES/bin/$file" "$TARGET/$name"
 done < <(find . -type f -executable -not -path './.git/*')
 
