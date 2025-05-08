@@ -349,6 +349,7 @@ case "$SUBCOMMAND" in
     echo "    u | update [repo] - update repository"
     echo "      -b | --branch [branch] - specify a preferred branch"
     echo "    ua | update all - update all installed repositories"
+    echo "    update self - update \`update-repo\` command"
     echo ""
     echo "Flags:"
     echo "    -s | -sources - specify sources folder (default /opt or ~/.repos)"

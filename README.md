@@ -44,6 +44,7 @@ Full usage:
  - `u` / `update` `<repo>` - update repository
       - `-b` / `--branch` `<branch>` - change preferred branch
  - `ua` / `update all` - update all installed repositories
+ - `update self` - update `update-repo` command
 
 ## Common flags:
  - `-s` / `-sources` - specify sources folder (default /opt or ~/.repos)
