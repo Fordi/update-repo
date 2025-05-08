@@ -4,6 +4,11 @@ TARGET="${1:-/usr/local/bin}"; shift
 
 SELF="/usr/local/bin/update-repo"
 
+if [[ $UID != 0 ]]; then
+  echo "Must be run as root" >&2
+  exit -1
+fi
+
 if [[ -z "$REPO" || "$REPO" == "all" ]]; then
   TYPE="Installed"
   if [[ -f "$SELF" ]]; then
