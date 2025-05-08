@@ -2,12 +2,14 @@
 REPO="$1"; shift
 TARGET="${1:-/usr/local/bin}"; shift
 
+SELF="/usr/bin/update-repo"
+
 if [[ -z "$REPO" || "$REPO" == "all" ]]; then
   TYPE="Installed"
-  if [[ -f /usr/bin/update-repo ]]; then
+  if [[ -f "$SELF" ]]; then
     TYPE="Updated"
   fi
-  wget https://fordi.github.io/update-repo/update-repo.sh -qO /usr/bin/update-repo-tmp
+  wget https://fordi.github.io/update-repo/update-repo.sh -qO "$SELF-tmp"
   chmod +x /usr/bin/update-repo-tmp
   echo "${TYPE}"' `update-repo` command' >&2
   if [[ "$REPO" == "all" ]]; then
@@ -19,10 +21,10 @@ if [[ -z "$REPO" || "$REPO" == "all" ]]; then
       fi
     done < <(find /opt -wholename '*/.git')
   fi
-  if [[ -f /usr/bin/update-repo ]]; then
-    rm /usr/bin/update-repo
-    mv /usr/bin/update-repo-tmp /usr/bin/update-repo
+  if [[ -f "$SELF" ]]; then
+    rm "$SELF"
   fi
+  mv "$SELF-tmp" "$SELF"
   exit
 fi
 
