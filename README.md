@@ -39,19 +39,19 @@ Full usage:
 
 ## Subcommands
 
- - `ls` | `list` - list installed repositories
- - `r` | `remove` `<repo>` - uninstall repository
- - `i` | `install` `<repo>` - install a repository
-     - `-b` | `-branch` `<branch>` - specify a preferred branch (default: main/master)
- - `c` | `configure` - modify global configuration
- - `d` | `dump-config` - dump the current global configuration
- - `u` | `update` `<repo>` - update repository
-      - `-b` | `-branch` `<branch>` - change preferred branch
- - `ua` | `update all` - update all installed repositories
+ - `ls` / `list` - list installed repositories
+ - `r` / `remove` `<repo>` - uninstall repository
+ - `i` / `install` `<repo>` - install a repository
+     - `-b` / `-branch` `<branch>` - specify a preferred branch (default: main/master)
+ - `c` / `configure` - modify global configuration
+ - `d` / `dump-config` - dump the current global configuration
+ - `u` / `update` `<repo>` - update repository
+      - `-b` / `-branch` `<branch>` - change preferred branch
+ - `ua` / `update all` - update all installed repositories
 
 ## Common flags:
- - `-s` | `-sources` - specify sources folder (default /opt or ~/.repos)
- - `-t` | `-target` - specify target folder (default /usr/local/bin or first item in PATH under ~)
+ - `-s` / `-sources` - specify sources folder (default /opt or ~/.repos)
+ - `-t` / `-target` - specify target folder (default /usr/local/bin or first item in PATH under ~)
 
 ## `<repo>`
  - project name - a GitHub repo assumed to be owned by $USER, e.g., `update-repo install foo` for user bar would be treated as `git@github.com:bar/foo.git`
