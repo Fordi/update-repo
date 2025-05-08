@@ -21,7 +21,7 @@ HERE="$SOURCES"
 function install() {
   local file="$1"; shift;
   local name="$(basename "$1")";
-  if [[ -f "$TARGET/$name" ]]; then
+  if [[ -e "$TARGET/$name" ]]; then
     rm "$TARGET/$name"
   fi
   echo "Symlinking $HERE/$file to $TARGET/$name"
