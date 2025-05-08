@@ -32,6 +32,7 @@ function home-first-bin() {
   done < <(echo "$PATH")
   mkdir -p "$HOME/.local/bin"
   echo "$HOME/.local/bin"
+  echo "Warning: No local user bin directory; created $HOME/.local/bin, but you must also add that to your path"
 }
 
 function get-target() {
