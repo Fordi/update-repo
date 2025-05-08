@@ -1,7 +1,6 @@
 #!/bin/bash
 SELF="$(basename "$0")"
 
-
 LOCAL_SOURCES=
 LOCAL_TARGET=
 LOCAL_CONF=
@@ -170,6 +169,9 @@ function assert-args() {
 function install-repo() {
   REPO="$(normalize-repo "$1")"
   SOURCE="$(get-sources)/$(project-name "$REPO")"
+  if [[ -d "$SOURCE" ]]; then
+    uninstall-repo "$REPO"
+  fi
   if [[ -z "$BRANCH" ]]; then
     git clone --depth=1 "$REPO" "$SOURCE" >&2
   else
@@ -198,7 +200,6 @@ function update-repo() {
     instal-links "$source"
   fi
 }
-
 
 function update-self() {
   SELF="$(get-target)/update-repo"
