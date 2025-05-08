@@ -179,6 +179,10 @@ function install-repo() {
   else
     git clone --depth=1 -b "$BRANCH" "$REPO" "$SOURCE" >&2
   fi
+  if [[ -f "$SOURCE/package.json" ]]; then
+    cd "$SOURCE"
+    npm i
+  fi
   install-links "$SOURCE"
 }
 
@@ -264,8 +268,6 @@ while ((${#})); do case "$1" in
     ARGS+=($1)
   ;;
 esac; shift; done
-
-
 
 case "$SUBCOMMAND" in
   dump-config)
