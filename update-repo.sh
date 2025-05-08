@@ -20,8 +20,8 @@ cd "$SOURCES"
 function install() {
   local file="$1"; shift;
   local name="$(basename "$1")";
-  if [[ -e "$TARGET/bin/$name" ]]; then
-    rm "$TARGET/bin/$name"
+  if [[ -e "$TARGET/$name" ]]; then
+    rm "$TARGET/$name"
   fi
   echo "Symlinking $SOURCES/bin/$file to $TARGET/$name"
   ln -s "$SOURCES/bin/$file" "$TARGET/$name"
