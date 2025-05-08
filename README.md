@@ -3,7 +3,7 @@
 Installation:
 
 ```bash
-wget https://fordi.github.io/update-repo/update-repo.sh -qO - | sudo bash
+wget https://fordi.github.io/update-repo/update-repo.sh -qO - | bash
 ```
 
 Update:
@@ -17,18 +17,18 @@ Usage:
 - Not installed:
 
 ```bash
-wget https://fordi.github.io/update-repo/update-repo.sh -qO - | sudo bash /dev/stdin {repository URL}
+wget https://fordi.github.io/update-repo/update-repo.sh -qO - | bash /dev/stdin {arguments}
 ```
 
 - Installed
 
 ```bash
-update-repo {repository URL}
+update-repo {arguments}
 ```
 
 - Update all installed
 ```bash
-update-repo all
+update-repo ua
 ```
 
 Target repository must have a `bin` folder containing executables to be installed to `/usr/local/bin`.
