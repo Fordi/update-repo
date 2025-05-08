@@ -34,14 +34,15 @@ Full usage:
 
 ## Subcommands
 
- - `ls` / `list` - list installed repositories
+ - `ls` / `list` - list installed project folders
+     - `-v` / `--verbose` - List installed projects with repository and linked binaries
  - `r` / `remove` `<repo>` - uninstall repository
  - `i` / `install` `<repo>` - install a repository
-     - `-b` / `-branch` `<branch>` - specify a preferred branch (default: main/master)
+     - `-b` / `--branch` `<branch>` - specify a preferred branch (default: main/master)
  - `c` / `configure` - modify global configuration
  - `d` / `dump-config` - dump the current global configuration
  - `u` / `update` `<repo>` - update repository
-      - `-b` / `-branch` `<branch>` - change preferred branch
+      - `-b` / `--branch` `<branch>` - change preferred branch
  - `ua` / `update all` - update all installed repositories
 
 ## Common flags:
