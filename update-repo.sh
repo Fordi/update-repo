@@ -291,6 +291,10 @@ case "$SUBCOMMAND" in
   ;;
   remove)
     assert-args 1
+    if [[ "${ARGS[0]}" == "self" ]]; then
+      rm -rf "$0"
+      exit
+    fi
     uninstall-repo "${ARGS[0]}"
   ;;
   list)
