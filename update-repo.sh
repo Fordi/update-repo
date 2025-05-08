@@ -287,6 +287,7 @@ case "$SUBCOMMAND" in
   install)
     assert-args 1
     install-repo "${ARGS[0]}"
+    update-self
   ;;
   remove)
     assert-args 1
