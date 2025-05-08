@@ -202,6 +202,9 @@ function update-repo() {
   else
     cd "$source"
     git pull
+    if [[ -f "$source/package.json" ]]; then
+      npm i
+    fi
     uninstall-links "$source"
     instal-links "$source"
   fi
