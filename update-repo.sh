@@ -14,7 +14,7 @@ if [[ -z "$REPO" || "$REPO" == "all" ]]; then
   if [[ -f "$SELF" ]]; then
     TYPE="Updated"
   fi
-  wget https://fordi.github.io/update-repo/update-repo.sh -qO "$SELF-tmp"
+  wget https://raw.githubusercontent.com/Fordi/update-repo/refs/heads/main/update-repo.sh -qO "$SELF-tmp"
   chmod +x "$SELF-tmp"
   if [[ "$REPO" == "all" ]]; then
     while read git; do
