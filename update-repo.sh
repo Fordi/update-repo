@@ -16,19 +16,18 @@ else
   git clone --depth 1 "$REPO" "$SOURCES" > /dev/null 2>&1
 fi
 cd "$SOURCES"
-HERE="$SOURCES"
 
 function install() {
   local file="$1"; shift;
   local name="$(basename "$1")";
-  if [[ -e "$TARGET/$name" ]]; then
-    rm "$TARGET/$name"
+  if [[ -e "$TARGET/bin/$name" ]]; then
+    rm "$TARGET/bin/$name"
   fi
-  echo "Symlinking $HERE/$file to $TARGET/$name"
-  ln -s "$HERE/$file" "$TARGET/$name"
+  echo "Symlinking $SOURCES/bin/$file to $TARGET/$name"
+  ln -s "$SOURCES/bin/$file" "$TARGET/$name"
 }
 
-cd bin
+cd "$SOURCES/bin"
 while read file; do
   install "$file"
 done < <(find . -type f -executable -not -path './.git/*')
